@@ -23,5 +23,12 @@
     <string name="word_eighteen">Mega Mushroom</string>
     <string name="word_nineteen">Super Leaf</string>
     <string name="word_twenty">Thunder Cloud</string>
+    <string name="rules">Guess letters to try and fill out the word.
+        If you guess a letter wrong, it fills out a part of the hangman.
+        If you guess the whole word and are wrong while half or less of
+        the letters are filled out, then the penalty is greater, filling out
+        two of the hangman pieces instead of one. If more than half are filled out
+        when you guess the whole word wrong, it will only fill in one piece.
+        Fill out all the letters to win. </string>
 
 </resources>
