@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
     <string name="word1">Red Shell</string>
     <string name="word2">Green Shell</string>
     <string name="word3">Spiny Shell</string>
@@ -23,6 +24,7 @@
     <string name="word18">Mega Mushroom</string>
     <string name="word19">Super Leaf</string>
     <string name="word20">Thunder Cloud</string>
+
     <string name="rules">Guess letters to try and fill out the word.
         Wrong guesses will be displayed on the page.
         If you guess a letter wrong, it fills out a part of the hangman.
@@ -31,7 +33,9 @@
         two of the hangman pieces instead of one. If more than half are filled out
         when you guess the whole word wrong, it will only fill in one piece.
         Fill out all the letters to win. </string>
+
     <string name="guess_hint">Enter either a single character or the whole word.</string>
     <string name="guess_button">Click to guess</string>
     <string name = "no_spaces">Guess cannot include spaces.</string>
+
 </resources>
