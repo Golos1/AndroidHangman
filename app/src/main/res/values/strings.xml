@@ -24,6 +24,7 @@
     <string name="word_nineteen">Super Leaf</string>
     <string name="word_twenty">Thunder Cloud</string>
     <string name="rules">Guess letters to try and fill out the word.
+        Wrong guesses will be displayed on the page.
         If you guess a letter wrong, it fills out a part of the hangman.
         If you guess the whole word and are wrong while half or less of
         the letters are filled out, then the penalty is greater, filling out
