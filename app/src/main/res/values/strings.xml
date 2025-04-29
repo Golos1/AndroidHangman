@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidHangmanApp</string>
+    <string name="app_name">Mario Kart Item Hangman</string>
     <string name="action_settings">Settings</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
