@@ -4,14 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+    <TextView
+        android:id="@+id/previous_guesses"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        />
     <ImageView
         android:id="@+id/currentImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guess"
+        app:layout_constraintTop_toBottomOf="@id/previous_guesses"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/word0">
     </ImageView>
+    <EditText
+        android:background="@color/md_theme_onSecondary"
+        android:id="@+id/guess"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+    app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="@string/guess_hint">
+    </EditText>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

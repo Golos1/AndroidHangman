@@ -3,26 +3,28 @@
     <string name="action_settings">Settings</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="word_one">Red Shell</string>
-    <string name="word_two">Green Shell</string>
-    <string name="word_three">Spiny Shell</string>
-    <string name="word_four">Fire Flower</string>
-    <string name="word_five">Mushroom</string>
-    <string name="word_six">Boomerang Flower</string>
-    <string name="word_seven">Lightning</string>
-    <string name="word_eight">Bullet Bill</string>
-    <string name="word_nine">Blooper</string>
-    <string name="word_ten">Banana</string>
-    <string name="word_eleven">Coin</string>
-    <string name="word_twelve">Golden Mushroom</string>
-    <string name="word_thirteen">Piranha Plant</string>
-    <string name="word_fourteen">Super Horn</string>
-    <string name="word_fifteen">Star</string>
-    <string name="word_sixteen">Boo</string>
-    <string name="word_seventeen">Chain Chomp</string>
-    <string name="word_eighteen">Mega Mushroom</string>
-    <string name="word_nineteen">Super Leaf</string>
-    <string name="word_twenty">Thunder Cloud</string>
+
+    <string name="word1">Red Shell</string>
+    <string name="word2">Green Shell</string>
+    <string name="word3">Spiny Shell</string>
+    <string name="word4">Fire Flower</string>
+    <string name="word5">Mushroom</string>
+    <string name="word6">Bob-omb</string>
+    <string name="word7">Lightning</string>
+    <string name="word8">Bullet Bill</string>
+    <string name="word9">Blooper</string>
+    <string name="word10">Banana</string>
+    <string name="word11">Coin</string>
+    <string name="word12">Golden Mushroom</string>
+    <string name="word13">Piranha Plant</string>
+    <string name="word14">Super Horn</string>
+    <string name="word15">Star</string>
+    <string name="word16">Boo</string>
+    <string name="word17">Chain Chomp</string>
+    <string name="word18">Mega Mushroom</string>
+    <string name="word19">Super Leaf</string>
+    <string name="word20">Thunder Cloud</string>
+
     <string name="rules">Guess letters to try and fill out the word.
         Wrong guesses will be displayed on the page.
         If you guess a letter wrong, it fills out a part of the hangman.
@@ -31,5 +33,9 @@
         two of the hangman pieces instead of one. If more than half are filled out
         when you guess the whole word wrong, it will only fill in one piece.
         Fill out all the letters to win. </string>
+
+    <string name="guess_hint">Enter either a single character or the whole word.</string>
+    <string name="guess_button">Click to guess</string>
+    <string name = "no_spaces">Guess cannot include spaces.</string>
 
 </resources>
