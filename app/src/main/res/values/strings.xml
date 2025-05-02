@@ -26,11 +26,11 @@
     <string name="rules">Guess letters to try and fill out the word.
         Wrong guesses will be displayed on the page.
         If you guess a letter wrong, it fills out a part of the hangman.
-        If you guess the whole word and are wrong while half or less of
-        the letters are filled out, then the penalty is greater, filling out
-        two of the hangman pieces instead of one. If more than half are filled out
-        when you guess the whole word wrong, it will only fill in one piece.
-        Fill out all the letters to win. </string>
+        If you guess the whole word and are wrong, then the penalty is greater, filling out
+        two of the hangman pieces instead of one.
+        Fill out all the letters to win. 
+   </string>
+
     <string name="guess_hint">Enter either a single character or the whole word.</string>
     <string name="guess_button">Click to guess</string>
     <string name = "no_spaces">Guess cannot include spaces.</string>
