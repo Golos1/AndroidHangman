@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidhangmanapp.R;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class GameState {
@@ -11,7 +12,7 @@ public class GameState {
     private int negativePoints;
     private String wordToGuess;
     private Random rand = new Random();
-    private int[] letters;
+    private char[] letters;
     private String string;
     private String[] guesses = new String[10];
 
@@ -23,7 +24,7 @@ public class GameState {
      * @param word the word that needs to be guessed
      * @param lttrs the number of letters that have already been guessed
      */
-    public GameState(int guesses, int negative, String word, int[] lttrs){
+    public GameState(int guesses, int negative, String word, char[] lttrs){
         negativePoints = negative;
         totalGuesses = guesses;
         wordToGuess = word;
@@ -38,7 +39,8 @@ public class GameState {
         negativePoints = 0;
         totalGuesses = 0;
         wordToGuess = word;
-        letters = new int[wordToGuess.length()];
+        letters = new char[wordToGuess.length()];
+        Arrays.fill(letters, '_');
     }
     public int getTotalGuesses(){
         return totalGuesses;
@@ -52,11 +54,7 @@ public class GameState {
      * @return a char array consisting of all correctly guessed
      */
     public char[] getLetters(){
-        char[] result = new char[letters.length];
-        for( int letter: letters){
-            result[letter] = wordToGuess.charAt(letter);
-        }
-        return result;
+        return letters;
     }
 
     public void guessWord(String guess){

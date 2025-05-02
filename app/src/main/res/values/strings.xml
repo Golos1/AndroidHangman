@@ -34,4 +34,5 @@
     <string name="guess_hint">Enter either a single character or the whole word.</string>
     <string name="guess_button">Click to guess</string>
     <string name = "no_spaces">Guess cannot include spaces.</string>
+    <string name="word_status">word:</string>
 </resources>
