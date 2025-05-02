@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private GameState state;
     private ImageView currentImage;
     private EditText guessBox;
+    private TextView previous_guesses;
     private Random rand = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         String word;
         guessBox = (EditText)findViewById(R.id.guess);
         currentImage = (ImageView)findViewById(R.id.currentImage);
+        previous_guesses = (TextView)findViewById(R.id.previous_guesses);
         switch (wordIndex){
             case 1:
                 word = getResources().getString(R.string.word1);
@@ -103,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
                 word = getResources().getString(R.string.word1);
         }
         state = new GameState(word);
+        String underscores = "";
+        for(int i = 0; i < word.length(); i++){
+            underscores = underscores.concat("_");
+        }
         setSupportActionBar(binding.toolbar);
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
                         currentImage.setImageResource(R.drawable.word10);
                         break;
                 }
+                String newText = previous_guesses.getText() + " " + guess;
+                previous_guesses.setText(newText);
             }
         });
     }
