@@ -29,7 +29,7 @@
         Wrong guesses will be displayed on the page.
         If you guess a letter wrong, it fills out a part of the hangman.
         If you guess the whole word and are wrong, then it fills out 2 parts of the hangman.
-        Fill out all the letters to win. </string>
+        Fill out all the letters to win.</string>
 
     <string name="guess_hint">Enter either a single character or the whole word.</string>
     <string name="guess_button">Click to guess</string>
