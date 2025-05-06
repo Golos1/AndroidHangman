@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="Game Settings">
+
+       <SwitchPreferenceCompat
+        app:key="autosave"
+           android:title="Autosave on quit"
+           android:defaultValue="true"
+           android:summaryOff="Don't save on quit"
+           android:summaryOn="Save on quit."
+           />
+    </PreferenceCategory>
+    <PreferenceCategory app:title="Display">
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="@string/night_mode"
+            app:summaryOff="Night Mode Off"
+            app:summaryOn="Night Mode On"
+            app:title="Use Night Mode if OS allows." />
+    </PreferenceCategory>
+
+</PreferenceScreen>

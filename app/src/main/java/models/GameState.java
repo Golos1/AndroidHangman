@@ -1,20 +1,18 @@
 package models;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.androidhangmanapp.R;
+import com.google.gson.Gson;
 
 import java.util.Arrays;
-import java.util.Random;
+import java.util.LinkedList;
+import java.util.List;
 
 public class GameState {
     private int totalGuesses;
     private int negativePoints;
-    private String wordToGuess;
-    private Random rand = new Random();
-    private char[] letters;
-    private String string;
-    private String[] guesses = new String[10];
+    private final String wordToGuess;
+    private final char[] letters;
+    private List<String> previousGuesses = new LinkedList<>();
 
     /**
      *
@@ -45,6 +43,17 @@ public class GameState {
     public int getTotalGuesses(){
         return totalGuesses;
     }
+    public List<String> getPreviousGuesses(){
+        return previousGuesses;
+    }
+
+    /**
+     * Indicates whether the game is finished or not.
+     * @return true if the game is finished, false otherwise
+     */
+    public boolean isFinished(){
+        return (negativePoints >= 10 || new String(letters).equals(wordToGuess));
+    }
     public int getNegativePoints(){
         return negativePoints;
     }
@@ -58,6 +67,9 @@ public class GameState {
     }
 
     public void guessWord(String guess){
+        if(!previousGuesses.contains(guess)){
+            previousGuesses.add(guess);
+        }
         totalGuesses += 1;
         if(guess.length() > 1){
             if(guess.equals(wordToGuess)){
@@ -79,4 +91,24 @@ public class GameState {
             }
         }
     }
-}
+
+    /**
+     * Gets current game state as json string.
+     * @param game the current game state
+     * @return a json formatted string.
+     */
+    public static String getJSONFromGame(GameState game){
+        Gson gson = new Gson();
+        return gson.toJson (game);
+    }
+    /**
+     * Deserializes the json string containing the game state.
+     *
+     * @param json The serialized json string of the game object
+     * @return The GameState object
+     */
+    public static GameState getGameFromJSON (String json)
+    {
+        Gson gson = new Gson ();
+        return gson.fromJson (json, GameState.class);
+    }}

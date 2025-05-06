@@ -3,21 +3,20 @@ package com.example.androidhangmanapp.activities;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import androidx.preference.PreferenceManager;
 import android.os.Bundle;
 
 import com.example.androidhangmanapp.R;
 import com.google.android.material.button.MaterialButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import android.view.View;
 
 
 import com.example.androidhangmanapp.databinding.ActivityMainBinding;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +31,7 @@ import models.GameState;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String gameStateKey = "GAME_STATE";
     private ActivityMainBinding binding;
     private CoordinatorLayout activity_main;
     private GameState state;
@@ -39,10 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText guessBox;
     private TextView previous_guesses;
     private TextView correct_guesses;
-    private ConstraintLayout content_main;
     private MaterialButton fab;
     private Button newGame;
-    private Random rand = new Random();
+    private final Random rand = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         currentImage = (ImageView)findViewById(R.id.currentImage);
         previous_guesses = (TextView)findViewById(R.id.previous_guesses);
         correct_guesses = (TextView)findViewById(R.id.correct_guesses);
-        content_main = (ConstraintLayout)findViewById(R.id.content_main);
         activity_main = (CoordinatorLayout)findViewById(R.id.activity_main);
 
         fab = (MaterialButton)findViewById(R.id.fab);
@@ -205,8 +203,11 @@ public class MainActivity extends AppCompatActivity {
             String correctGuessString = new String(state.getLetters());
             correct_guesses.setText(correctGuessString);
             if(minusPoints < 10) {
-                String newText = previous_guesses.getText() + " " + guess;
-                previous_guesses.setText(newText);
+                StringBuilder newText = new StringBuilder();
+                for (String element: state.getPreviousGuesses()){
+                    newText.append(element).append(" ");
+                };
+                previous_guesses.setText(newText.toString());
             }
             else{
                 previous_guesses.setText(R.string.you_lost);
@@ -226,12 +227,22 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(id == R.id.action_settings){
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            intent.putExtra(gameStateKey, GameState.getJSONFromGame(state));
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        if(state.isFinished()){
+            editor.putString(gameStateKey, GameState.getJSONFromGame(state));
+        }
+        editor.apply();
     }
 }
