@@ -8,9 +8,9 @@
         android:title="@string/action_settings"
         app:showAsAction="collapseActionView" />
     <item
-        android:id="@+id/action_statistics"
+        android:id="@+id/action_rules"
         android:orderInCategory="101"
-        android:title="@string/statistics"
+        android:title="@string/see_rules"
         app:showAsAction="collapseActionView"
         />
 

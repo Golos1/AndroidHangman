@@ -29,7 +29,8 @@
         If you guess the whole word and are wrong, then the penalty is greater, filling out
         two of the hangman pieces instead of one.
         Spaces are not included in the word, so if the item is Bullet Bill, you want to guess BulletBill.
-        Fill out all the letters to win. 
+        This is not case-sensitive, so bulletbill would also work.
+        Fill out all the letters to win.
    </string>
 
     <string name="guess_hint">Enter either a single character or the whole word.</string>
@@ -56,4 +57,5 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="night_mode">night_mode</string>
     <string name="autosave">autosave</string>
+    <string name="see_rules">Rules</string>
 </resources>

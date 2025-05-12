@@ -5,6 +5,8 @@ import static android.view.View.VISIBLE;
 
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
+import static lib.Utils.showInfoDialog;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
@@ -254,8 +256,14 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(gameStateKey, GameState.getJSONFromGame(state));
             startActivity(intent);
         }
+        if(id == R.id.action_rules){
+            showAbout();
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void showAbout() {
+        showInfoDialog(MainActivity.this, "Mario Item Hangman Rules",getString(R.string.rules));
     }
     @Override
     protected void onStart(){
