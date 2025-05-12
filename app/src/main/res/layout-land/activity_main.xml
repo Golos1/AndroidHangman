@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:id="@+id/activity_main">
 
     <!-- AppBarLayout for toolbar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
+
 
         <!-- MaterialToolbar for action bar -->
         <com.google.android.material.appbar.MaterialToolbar
@@ -22,10 +24,30 @@
 
     <!-- Main content layout adjusted for landscape -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <TextView
+            android:id="@+id/previous_guesses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAlignment="textStart"
+            android:text=""
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/correct_guesses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/previous_guesses"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAlignment="textStart"
+            android:text="@string/word_status"
+            android:textSize="18sp"
+            />
         <!-- ImageView aligned to the right -->
         <ImageView
             android:id="@+id/currentImage"
@@ -41,16 +63,26 @@
         <EditText
             android:id="@+id/guess"
             android:layout_width="0dp"
-            android:layout_height="38dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="?actionBarSize"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:hint="@string/guess_hint"
+            android:lines="1"
             android:background="@color/md_theme_onSecondary"
-            app:layout_constraintWidth_percent="0.8"/>
+            app:layout_constraintWidth_percent="0.8"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Floating Action Button adjusted for landscape -->
+    <Button
+        android:id="@+id/new_game"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:clickable="false"
+        android:text=""/>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

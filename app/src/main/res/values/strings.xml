@@ -3,31 +3,32 @@
     <string name="action_settings">Settings</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="word1">Red Shell</string>
-    <string name="word2">Green Shell</string>
-    <string name="word3">Spiny Shell</string>
-    <string name="word4">Fire Flower</string>
+    <string name="word1">RedShell</string>
+    <string name="word2">GreenShell</string>
+    <string name="word3">SpinyShell</string>
+    <string name="word4">FireFlower</string>
     <string name="word5">Mushroom</string>
     <string name="word6">Bob-omb</string>
     <string name="word7">Lightning</string>
-    <string name="word8">Bullet Bill</string>
+    <string name="word8">BulletBill</string>
     <string name="word9">Blooper</string>
     <string name="word10">Banana</string>
     <string name="word11">Coin</string>
-    <string name="word12">Golden Mushroom</string>
-    <string name="word13">Piranha Plant</string>
-    <string name="word14">Super Horn</string>
+    <string name="word12">GoldenMushroom</string>
+    <string name="word13">PiranhaPlant</string>
+    <string name="word14">SuperHorn</string>
     <string name="word15">Star</string>
     <string name="word16">Boo</string>
-    <string name="word17">Chain Chomp</string>
-    <string name="word18">Mega Mushroom</string>
-    <string name="word19">Super Leaf</string>
-    <string name="word20">Thunder Cloud</string>
+    <string name="word17">ChainChomp</string>
+    <string name="word18">MegaMushroom</string>
+    <string name="word19">SuperLeaf</string>
+    <string name="word20">ThunderCloud</string>
     <string name="rules">Guess letters to try and fill out the word.
         Wrong guesses will be displayed on the page.
         If you guess a letter wrong, it fills out a part of the hangman.
         If you guess the whole word and are wrong, then the penalty is greater, filling out
         two of the hangman pieces instead of one.
+        Spaces are not included in the word, so if the item is Bullet Bill, you want to guess BulletBill.
         Fill out all the letters to win. 
    </string>
 
@@ -54,4 +55,5 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="night_mode">night_mode</string>
+    <string name="autosave">autosave</string>
 </resources>

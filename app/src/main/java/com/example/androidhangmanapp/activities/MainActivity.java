@@ -3,6 +3,8 @@ package com.example.androidhangmanapp.activities;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
@@ -32,6 +34,9 @@ import models.GameState;
 public class MainActivity extends AppCompatActivity {
 
     private final String gameStateKey = "GAME_STATE";
+    private String nightModeKey;
+    private String autosaveKey;
+
     private ActivityMainBinding binding;
     private CoordinatorLayout activity_main;
     private GameState state;
@@ -45,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        autosaveKey = getString(R.string.autosave);
+        nightModeKey = getString(R.string.night_mode);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         String word;
@@ -66,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startNewGame() {
         String word;
+        currentImage.setImageResource(R.drawable.word0);
         int wordIndex = rand.nextInt(20) + 1;
         switch (wordIndex){
             case 1:
@@ -132,29 +139,29 @@ public class MainActivity extends AppCompatActivity {
                 word = getResources().getString(R.string.word1);
         }
         state = new GameState(word);
-        String underscores = "";
-        for(int i = 0; i < word.length(); i++){
-            underscores = underscores.concat("_");
-        }
         fab.setVisibility(VISIBLE);
         fab.setClickable(true);
         guessBox.setVisibility(VISIBLE);
         newGame.setClickable(false);
         newGame.setVisibility(INVISIBLE);
+        setGuessesText();
         guessBox.setText("");
-        previous_guesses.setText("");
-        correct_guesses.setText(underscores);
+        correct_guesses.setText(new String(state.getLetters()));
         setSupportActionBar(binding.toolbar);
         setOnClickListener();
         activity_main.getRootView().invalidate();
     }
 
+
     private void setOnClickListener() {
         fab.setOnClickListener(view -> {
             String guess = guessBox.getText().toString();
-            if(guess.contains(" ")){
+            if(guess.isBlank()){
                 guessBox.setHint(R.string.no_spaces);
                 return;
+            }
+            else{
+                guess = guess.replace(" ", "");
             }
             state.guessWord(guess);
             int minusPoints = state.getNegativePoints();
@@ -189,30 +196,45 @@ public class MainActivity extends AppCompatActivity {
                     currentImage.setImageResource(R.drawable.word9);
                     break;
                 case 10:
+                default:
                     currentImage.setImageResource(R.drawable.word10);
-                    fab.setVisibility(INVISIBLE);
-                    fab.setClickable(false);
-                    guessBox.setVisibility(INVISIBLE);
-                    newGame.setVisibility(VISIBLE);
-                    newGame.setClickable(true);
-                    String restart = "New Game";
-                    newGame.setText(restart);
-                    currentImage.setImageResource(R.drawable.word0);
+                    newGameUI();
                     break;
             }
+            guessBox.setText("");
             String correctGuessString = new String(state.getLetters());
             correct_guesses.setText(correctGuessString);
-            if(minusPoints < 10) {
-                StringBuilder newText = new StringBuilder();
-                for (String element: state.getPreviousGuesses()){
-                    newText.append(element).append(" ");
-                };
-                previous_guesses.setText(newText.toString());
+            setGuessesText();
+            if(state.isFinished()){
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.remove(gameStateKey);
+                editor.apply();
             }
-            else{
-                previous_guesses.setText(R.string.you_lost);
+            if(state.isFinished() && state.getNegativePoints() < 10){
+                currentImage.setImageResource(R.drawable.victory);
+                newGameUI();
             }
         });
+    }
+
+    private void newGameUI() {
+        fab.setVisibility(INVISIBLE);
+        fab.setClickable(false);
+        guessBox.setVisibility(INVISIBLE);
+        newGame.setVisibility(VISIBLE);
+        newGame.setClickable(true);
+        String restart = "New Game";
+        newGame.setText(restart);
+    }
+
+    private void setGuessesText() {
+        StringBuilder newText = new StringBuilder();
+        for (String element: state.getPreviousGuesses()){
+            newText = newText.append(element).append(" ");
+        }
+        ;
+        previous_guesses.setText(newText.toString());
     }
 
     @Override
@@ -236,11 +258,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     @Override
+    protected void onStart(){
+        super.onStart();
+        SharedPreferences defaultSharedPreferences = getDefaultSharedPreferences(this);
+        if (defaultSharedPreferences.getBoolean(autosaveKey, true)) {
+            String gameString = defaultSharedPreferences.getString(gameStateKey, null);
+            if (gameString != null) {
+                state = GameState.getGameFromJSON(gameString);
+                newGame.setVisibility(INVISIBLE);
+                setGuessesText();
+                correct_guesses.setText(new String(state.getLetters()));
+            }
+        }
+    }
+
+    @Override
     protected void onStop(){
         super.onStop();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
-        if(state.isFinished()){
+        if(!state.isFinished() && prefs.getBoolean("autosave",true)){
             editor.putString(gameStateKey, GameState.getJSONFromGame(state));
         }
         editor.apply();

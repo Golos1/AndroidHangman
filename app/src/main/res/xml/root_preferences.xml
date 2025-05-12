@@ -4,7 +4,7 @@
     <PreferenceCategory app:title="Game Settings">
 
        <SwitchPreferenceCompat
-        app:key="autosave"
+        app:key="@string/autosave"
            android:title="Autosave on quit"
            android:defaultValue="true"
            android:summaryOff="Don't save on quit"

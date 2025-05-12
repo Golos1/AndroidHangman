@@ -25,7 +25,7 @@ public class GameState {
     public GameState(int guesses, int negative, String word, char[] lttrs){
         negativePoints = negative;
         totalGuesses = guesses;
-        wordToGuess = word;
+        wordToGuess = word.toLowerCase().replace(" ","");
         letters = lttrs;
     }
 
@@ -36,9 +36,16 @@ public class GameState {
     public GameState(String word){
         negativePoints = 0;
         totalGuesses = 0;
-        wordToGuess = word;
-        letters = new char[wordToGuess.length()];
-        Arrays.fill(letters, '_');
+        wordToGuess = word.toLowerCase().replace(" ","");
+        letters = new char[ 2 * wordToGuess.length()];
+        for(int i = 0;i < letters.length; i++){
+            if(i % 2 == 0){
+                letters[i] = '_';
+            }
+            else {
+                letters[i] = ' ';
+            }
+        }
     }
     public int getTotalGuesses(){
         return totalGuesses;
@@ -52,7 +59,9 @@ public class GameState {
      * @return true if the game is finished, false otherwise
      */
     public boolean isFinished(){
-        return (negativePoints >= 10 || new String(letters).equals(wordToGuess));
+        String victoryString = new String(letters);
+        victoryString = victoryString.replace(" ","");
+        return (negativePoints >= 10 || victoryString.equals(wordToGuess));
     }
     public int getNegativePoints(){
         return negativePoints;
@@ -72,9 +81,9 @@ public class GameState {
         }
         totalGuesses += 1;
         if(guess.length() > 1){
-            if(guess.equals(wordToGuess)){
+            if(guess.toLowerCase().equals(wordToGuess)){
                 for (int i = 0; i < wordToGuess.length(); i++){
-                    letters[i] = wordToGuess.charAt(i);
+                    letters[2 * i] = wordToGuess.charAt(i);
                 }
             }
             else{
@@ -82,12 +91,16 @@ public class GameState {
             }
         }
         else if (guess.length() == 1){
-            int index = wordToGuess.indexOf(guess);
+            int index = wordToGuess.indexOf(guess.toLowerCase());
             if( index == -1){
                 negativePoints += 1;
             }
-            else{
-                letters[index] = wordToGuess.charAt(index);
+            else {
+                for (int i = 0; i < wordToGuess.length(); i++) {
+                    if (guess.charAt(0) == wordToGuess.charAt(i)) {
+                        letters[2 * i] = wordToGuess.charAt(i);
+                    }
+                }
             }
         }
     }
